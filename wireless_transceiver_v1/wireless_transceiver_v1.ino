@@ -76,7 +76,7 @@ void handleClick (AsyncWebServerRequest *request) {
     
     // Engage Switch for 0.5 seconds
     digitalWrite(SOFT_RELAY_PIN, HIGH);
-    delay(500);
+    delay(800);
     digitalWrite(SOFT_RELAY_PIN, LOW);
 
     // Display animation

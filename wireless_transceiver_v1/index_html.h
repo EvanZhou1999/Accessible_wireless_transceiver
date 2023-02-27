@@ -19,7 +19,7 @@ const char INDEX_HTML[] PROGMEM = R"=====(
             h2{
               font-size: 1.5rem;
               font-weight: bold;
-              color: #046EC4;
+              color: #DE8344;
             }
             .topnav {
                 overflow: hidden;
@@ -46,7 +46,7 @@ const char INDEX_HTML[] PROGMEM = R"=====(
                 text-align: center;
                 outline: none;
                 color: #fff;
-                background-color: #046EC4;
+                background-color: #DE8344;
                 border: none;
                 border-radius: 15px;
                 -webkit-touch-callout: none;
@@ -58,7 +58,7 @@ const char INDEX_HTML[] PROGMEM = R"=====(
                 -webkit-tap-highlight-color: rgba(0,0,0,0);
             }
             .button:active {
-                background-color: #458fc4;
+                background-color: #DEA27E;
                 box-shadow: 2 2px #CDCDCD;
                 transform: translateY(2px);
             }
@@ -75,7 +75,7 @@ const char INDEX_HTML[] PROGMEM = R"=====(
         <div class="topnav">
             <h1>Accessible Wireless Switch<h1>
         </div>
-        <div style="background: #1AA7EC; height: 10px;"></div>
+        <div style="background: #DE9558; height: 10px;"></div>
         <!-- Div for the body of the page -->
         <div class="content">
             <div class="card">
@@ -106,7 +106,7 @@ const char INDEX_HTML[] PROGMEM = R"=====(
                 </button>
                 <br>
                 <br>
-                <button id="button_help" class="button" onclick="window.location.href='https://github.com/EvanZhou1999';">
+                <button id="button_help" class="button" onclick="window.location.href='https://github.com/EvanZhou1999/Accessible_wireless_transceiver';">
                     Source Code
                 </button>
                 

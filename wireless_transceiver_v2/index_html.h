@@ -122,7 +122,7 @@ const char INDEX_HTML[] PROGMEM = R"=====(
                 // Send request
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function() {};
-                const path = "control/click";
+                const path = "control/click?interval=500"; // Engage switch for 0.5 seconds
                 xhttp.open("GET", path, true);
                 xhttp.send();
               }

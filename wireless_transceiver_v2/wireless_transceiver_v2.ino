@@ -70,13 +70,25 @@ void handleRoot(AsyncWebServerRequest *request) {
 }
 
 void handleClick (AsyncWebServerRequest *request) {
-
+    int paramValue; // url parameter named "interval" ranging between 0 to 6000ms
+    if (request->hasParam("interval") ) {
+        paramValue = request->getParam("interval")->value().toInt();
+        Serial.println("Get Parameter: "+paramValue);
+    }else{
+        Serial.println("[ERROR] >>> handleClick: no url Param - interval");
+    }
+    
+    if (paramValue > 6000 && paramValue < 0) {
+        Serial.println("[ERROR] >>> handleClick: invalid parameter range (0-6000ms)");
+        return;
+    }
+    
     // Display animation
     LED_Message_queue_send(LED_CIRCLE_IN, 0, 40, 40, false);
     
-    // Engage Switch for 0.5 seconds
+    // Engage Switch for defined periods
     digitalWrite(SOFT_RELAY_PIN, HIGH);
-    delay(800);
+    delay(paramValue);
     digitalWrite(SOFT_RELAY_PIN, LOW);
 
     // Display animation
@@ -85,6 +97,26 @@ void handleClick (AsyncWebServerRequest *request) {
     // Acknowledge with 200 response
     request->send_P(200, "text/plain", "OK");
 
+    // return to normal status indicator
+    LED_Message_queue_send(LED_PERSIST_STATUS_2, 100, 20, 0, false);
+}
+
+void handleActivation (AsyncWebServerRequest *request) {
+    // Display animation
+    LED_Message_queue_send(LED_CIRCLE_IN, 0, 40, 40, false);
+    // Engage Switch
+    digitalWrite(SOFT_RELAY_PIN, HIGH);
+    // Acknowledge with 200 response
+    request->send_P(200, "text/plain", "OK");
+}
+
+void handleDeactivation (AsyncWebServerRequest *request) {
+    // Display animation
+    LED_Message_queue_send(LED_LOAD_OUT, 0, 40, 40, false);
+    // Disengage Switch
+    digitalWrite(SOFT_RELAY_PIN, LOW);
+    // Acknowledge with 200 response
+    request->send_P(200, "text/plain", "OK");
     // return to normal status indicator
     LED_Message_queue_send(LED_PERSIST_STATUS_2, 100, 20, 0, false);
 }
@@ -263,6 +295,8 @@ void setup() {
         // Setup Web server callbacks:
         server.on("/", HTTP_GET, handleRoot);
         server.on("/control/click", handleClick);
+        server.on("/control/activate", handleActivation);
+        server.on("/control/deactivate", handleDeactivation);
     
         // Begin Server
         server.begin();
